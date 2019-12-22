@@ -12,7 +12,7 @@ Index(['BUYER_CITY', 'BUYER_STATE', 'BUYER_ZIP', 'BUYER_COUNTY', 'DRUG_NAME',
       dtype='object')
 ```
 
-We took advantage of the `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files with 200,000 rows each with the following Python code:
+We took advantage of the `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files with 200,000 rows with the following Python code:
 ```Python
 import pandas as pd
 path = 'arcos-ca-statewide-itemized.tsv'
@@ -24,4 +24,4 @@ for i, c in enumerate(chunck):
     c.to_csv(f'data/ca-statewide-{i+1:03d}.csv', encoding='utf-8', index=False)
 ```
 
-The result turned the 6.4 GB file and save it to 231 files, all totaling 2.2 GB.
+The result turned the 6.4 GB file and save it to 70 files, all totaling 2.0 GB.
