@@ -24,4 +24,4 @@ for i, c in enumerate(chunck):
     c.to_csv(f'data/ca-statewide-{i+1:03d}.csv', encoding='utf-8', index=False)
 ```
 
-The result turned the 6.4 GB file and save it to 70 files, all totaling 2.0 GB.
+The result turned the 6.4 GB file and saved it to 70 files, all totaling 2.0 GB.
