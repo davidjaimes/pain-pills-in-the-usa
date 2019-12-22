@@ -21,7 +21,7 @@ for i, c in enumerate(chunck):
     c = c[['BUYER_CITY', 'BUYER_STATE', 'BUYER_ZIP', 'BUYER_COUNTY',
        'DRUG_NAME', 'QUANTITY', 'TRANSACTION_DATE', 'CALC_BASE_WT_IN_GM',
        'DOSAGE_UNIT', 'Product_Name', 'Ingredient_Name', 'Measure']]
-    c.to_csv(f'data/ca-statewide-{i+1:03d}.csv', encoding='utf-8', index=False)
+    c.to_csv(f'ca-opioid-data/ca-statewide-{i+1:03d}.csv', encoding='utf-8', index=False)
 ```
 
 The result turned the 6.4 GB file and saved it to 70 files, all totaling 2.0 GB.
