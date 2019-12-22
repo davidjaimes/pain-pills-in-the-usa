@@ -12,7 +12,7 @@ Index(['BUYER_CITY', 'BUYER_STATE', 'BUYER_ZIP', 'BUYER_COUNTY', 'DRUG_NAME',
       dtype='object')
 ```
 
-We took advantage of the `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files with 200,000 rows with the following Python code:
+We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files with 200,000 rows with the following Python code:
 ```Python
 import pandas as pd
 path = 'arcos-ca-statewide-itemized.tsv'
