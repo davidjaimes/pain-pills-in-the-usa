@@ -42,3 +42,5 @@ for f in files[1:]:
     unique = np.unique(concat)
 np.savetxt('unique_zip_codes.txt', sorted(unique), fmt='%9d')
 ```
+
+We found a total of 1,288 zip codes.
