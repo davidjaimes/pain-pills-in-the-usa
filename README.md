@@ -25,3 +25,20 @@ for i, c in enumerate(chunck):
 ```
 
 The result turned the 6.4 GB file and saved it to 70 files, all totaling 2.0 GB.
+
+### Unique Zip Codes
+
+Instead of grabbing approximately all 2,500 California zip codes, we wanted to find only the zip codes listed in the 70 files of data. The code to find the unique codes is as follows:
+```Python
+import glob as gl
+import pandas as pd
+import numpy as np
+files = sorted(gl.glob('ca-opioid-data/*.csv'))
+df = pd.read_csv(files[0])
+unique = df['BUYER_ZIP'].unique()
+for f in files[1:]:
+    df = pd.read_csv(f)
+    concat = np.concatenate((unique, df['BUYER_ZIP'].unique()), axis=None)
+    unique = np.unique(concat)
+np.savetxt('unique_zip_codes.txt', sorted(unique), fmt='%9d')
+```
