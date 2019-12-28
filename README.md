@@ -59,9 +59,10 @@ for i, f in enumerate(files):
     valcnt = valcnt.rename(columns={'index': 'Zip Code', 'BUYER_ZIP': 'Counts'})
     zipcode = pd.merge(zipcode, valcnt, how='left', on='Zip Code')
     if i > 0:
+        zipcode = zipcode.fillna(0)
         zipcode['Counts_x'] = zipcode['Counts_x'] + zipcode['Counts_y']
         zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
         del zipcode['Counts_y']
-zipcode = zipcode.sort_values(by=['Counts'], ascending=False).dropna()
+zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
 zipcode.to_csv('zip_value_counts.csv', index=False)
 ```
