@@ -2,7 +2,7 @@
 
 We went to this [Washington Post](https://www.washingtonpost.com/graphics/2019/investigations/dea-pain-pill-database/#download-resources) investigation and got the state-wide data for California from 2006 to 2012. The file `arcos-ca-statewide-itemized.tsv` is 6.4 GB and came from the Drug Enforcement Administration's (DEA) database known as ARCOS (Automation of Reports and Consolidated Orders System).
 
-### Data Pruning
+## Data Pruning
 
 We did not need all 42 columns and only chose to work with these 12 column names:
 ```
@@ -26,7 +26,7 @@ for i, c in enumerate(chunck):
 
 The result turned the 6.4 GB file and saved it to 70 files, all totaling 2.0 GB.
 
-### Unique Zip Codes
+## Unique Zip Codes
 
 Instead of grabbing approximately all 2,500 California zip codes, we wanted to find only the zip codes listed in the 70 files of data. The code to find the unique codes is as follows:
 ```Python
@@ -45,7 +45,7 @@ np.savetxt('unique_zip_codes.txt', sorted(unique), fmt='%9d')
 
 We found a total of 1,288 zip codes.
 
-### Zip Code Counts
+## Zip Code Counts
 
 Before taking a random sample we can check which zip codes have the most transactions. The code to find the number of counts per zip code:
 ```Python
