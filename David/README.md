@@ -3,6 +3,7 @@
 We went to this [Washington Post](https://www.washingtonpost.com/graphics/2019/investigations/dea-pain-pill-database/#download-resources) investigation and got the state-wide data for California from 2006 to 2012. The file `arcos-ca-statewide-itemized.tsv` is 6.4 GB and came from the Drug Enforcement Administration's (DEA) database known as ARCOS (Automation of Reports and Consolidated Orders System).
 
 Other Data:
+* File: census_2010_population_zcta5.csv | Source: https://data.census.gov/cedsci/
 * File: CA_2010_population.csv | Source: http://www.dof.ca.gov/Reports/Demographic_Reports/Census_2010/
 
 ## Data Pruning
