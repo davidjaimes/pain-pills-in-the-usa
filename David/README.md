@@ -70,3 +70,30 @@ for i, f in enumerate(files):
 zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
 zipcode.to_csv('zip_value_counts.csv', index=False)
 ```
+
+## Total Number of Pills
+
+```Python
+import pandas as pd
+import glob as gl
+merge = pd.read_table('unique_zip_codes.txt', names=['BUYER_ZIP'])
+merge['DOSAGE_UNIT'] = 0
+merge = merge.set_index('BUYER_ZIP')
+files = sorted(gl.glob('ca-opioid-data/*.csv'))
+for i, f in enumerate(files):
+    df = pd.read_csv(f, usecols=['BUYER_ZIP', 'DOSAGE_UNIT', 'TRANSACTION_DATE'])
+    # Uncomment next two lines for specific year.
+    # df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
+    # df = df[df['TRANSACTION_DATE'].dt.year == 2010]
+    del df['TRANSACTION_DATE']
+    grp = df.groupby('BUYER_ZIP')
+    merge = pd.merge(merge, grp.sum(), how='left', on='BUYER_ZIP')
+    merge = merge.fillna(0)
+    merge['DOSAGE_UNIT_x'] = merge['DOSAGE_UNIT_x'] + merge['DOSAGE_UNIT_y']
+    merge = merge.rename(columns={'DOSAGE_UNIT_x': 'DOSAGE_UNIT'})
+    del merge['DOSAGE_UNIT_y']
+merge = merge.reset_index()
+merge = merge.rename(columns={'BUYER_ZIP': 'Zip Code', 'DOSAGE_UNIT': '2006-2012 Pills'})
+merge = merge.astype('int32')
+merge.to_csv('2006-2012_pills.csv', index=False)
+```
