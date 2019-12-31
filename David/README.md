@@ -49,26 +49,29 @@ np.savetxt('unique_zip_codes.txt', sorted(unique), fmt='%9d')
 
 We found a total of 1,288 zip codes.
 
-## Zip Code Counts
+## Total Transactions Per Zip Code
 
 Before taking a random sample we can check which zip codes have the most transactions. The code to find the number of counts per zip code:
 ```Python
 import glob as gl
 import pandas as pd
 zipcode = pd.read_table('unique_zip_codes.txt', names=['Zip Code'])
+zipcode['Counts'] = 0
 files = sorted(gl.glob('ca-opioid-data/*.csv'))
 for i, f in enumerate(files):
     df = pd.read_csv(f)
+    # Uncomment next two lines for specific year.
+    # df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
+    # df = df[df['TRANSACTION_DATE'].dt.year == 2010]
     valcnt = pd.DataFrame(df['BUYER_ZIP'].value_counts()).reset_index()
     valcnt = valcnt.rename(columns={'index': 'Zip Code', 'BUYER_ZIP': 'Counts'})
     zipcode = pd.merge(zipcode, valcnt, how='left', on='Zip Code')
-    if i > 0:
-        zipcode = zipcode.fillna(0)
-        zipcode['Counts_x'] = zipcode['Counts_x'] + zipcode['Counts_y']
-        zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
-        del zipcode['Counts_y']
+    zipcode = zipcode.fillna(0)
+    zipcode['Counts_x'] = zipcode['Counts_x'] + zipcode['Counts_y']
+    zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
+    del zipcode['Counts_y']
 zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
-zipcode.to_csv('zip_value_counts.csv', index=False)
+zipcode.to_csv('2006-2012_transactions.csv', index=False)
 ```
 
 ## Total Number of Pills
