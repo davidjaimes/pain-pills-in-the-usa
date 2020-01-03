@@ -32,7 +32,7 @@ Index(['BUYER_ZIP', TRANSACTION_DATE', 'DOSAGE_UNIT', Ingredient_Name'],
       dtype='object')
 ```
 
-We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **795 MB** with the following Python code:
+We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **943 MB** with the following Python code:
 
 ```Python
 import pandas as pd
@@ -40,7 +40,7 @@ path = 'arcos-ca-statewide-itemized.tsv'
 chunck = pd.read_csv(path, delimiter='\t', chunksize=200000, low_memory=False)
 for i, c in enumerate(chunck):
     c = c[['BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT', 'Ingredient_Name']]
-    c.to_csv(f'arcos-ca/data/statewide-{i+1:03d}.csv', index=False)
+    c.to_csv(f'arcos-ca/data/statewide-{i+1:02d}.csv', index=False)
 ```
 
 # Zip Codes
