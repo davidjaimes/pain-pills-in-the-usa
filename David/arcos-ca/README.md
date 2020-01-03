@@ -74,7 +74,7 @@ The code to find the total number of transactions per zip code:
 ```Python
 import glob as gl
 import pandas as pd
-zipcode = pd.read_table('arcos-ca/zip_codes.txt', names=['Zip Code'])
+zipcode = pd.read_csv('arcos-ca/zip_codes.csv')
 zipcode['Counts'] = 0
 files = sorted(gl.glob('arcos-ca/data/*.csv'))
 for i, f in enumerate(files):
@@ -90,7 +90,8 @@ for i, f in enumerate(files):
     zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
     del zipcode['Counts_y']
 zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
-zipcode = zipcode.rename(columns={'Counts': 'Transactions'}).astype('int32')
+zipcode = zipcode.rename(columns={'Counts': 'Transactions'})
+zipcode['Transactions'] = zipcode['Transactions'].astype('int32')
 zipcode.to_csv('arcos-ca/transactions.csv', index=False)
 ````
 
