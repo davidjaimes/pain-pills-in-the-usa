@@ -1,6 +1,6 @@
 # Data Collection
 
-We went to this [Washington Post investigation](https://www.washingtonpost.com/graphics/2019/investigations/dea-pain-pill-database/#download-resources) and got the state-wide data for California. The file arcos-ca-statewide-itemized.tsv is 6.4 GB and came from the Drug Enforcement Administration's (DEA) database known as ARCOS (Automation of Reports and Consolidated Orders System). The column headers for this file are :
+We went to this [Washington Post investigation](https://www.washingtonpost.com/graphics/2019/investigations/dea-pain-pill-database/#download-resources) and got the state-wide data for California. The file `arcos-ca-statewide-itemized.tsv` is 6.4 GB and came from the Drug Enforcement Administration's (DEA) database known as ARCOS (Automation of Reports and Consolidated Orders System). The column headers for this file are :
 
 ```Python
 import pandas as pd
