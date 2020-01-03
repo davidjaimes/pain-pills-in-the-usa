@@ -117,12 +117,12 @@ The code to find the total number of pills per zip code:
 ```Python
 import pandas as pd
 import glob as gl
-merge = pd.read_table('arcos-ca/zip_codes.txt', names=['BUYER_ZIP'])
+merge = pd.read_csv('arcos-ca/zip_codes.csv')
 merge['DOSAGE_UNIT'] = 0
-merge = merge.set_index('BUYER_ZIP')
+merge = merge.rename(columns={'Zip Code': 'BUYER_ZIP'})
 files = sorted(gl.glob('arcos-ca/data/*.csv'))
 for i, f in enumerate(files):
-    df = pd.read_csv(f, usecols=['BUYER_ZIP', 'DOSAGE_UNIT', 'TRANSACTION_DATE'])
+    df = pd.read_csv(f)
     # Uncomment next two lines for specific year.
     # df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
     # df = df[df['TRANSACTION_DATE'].dt.year == 2010]
@@ -133,23 +133,24 @@ for i, f in enumerate(files):
     merge['DOSAGE_UNIT_x'] = merge['DOSAGE_UNIT_x'] + merge['DOSAGE_UNIT_y']
     merge = merge.rename(columns={'DOSAGE_UNIT_x': 'DOSAGE_UNIT'})
     del merge['DOSAGE_UNIT_y']
-merge = merge.reset_index()
 merge = merge.rename(columns={'BUYER_ZIP': 'Zip Code', 'DOSAGE_UNIT': 'Pills'})
-merge = merge.sort_values(by=['Pills'], ascending=False).astype('int32')
+merge = merge.sort_values(by=['Pills'], ascending=False)
+merge['Pills'] = merge['Pills'].astype('int32')
 merge.to_csv('arcos-ca/pills.csv', index=False)
 ```
 
 ## Top Ten
 
-Index|Zip Code|Pills|City
----|---|---|---
-0|94550|368045810|Livermore
-1|90242|187157905|Downey
-2|92010|74056390|Carlsbad
-3|95350|42161712|Modesto
-4|95825|41336891|Sacramento
-5|95355|39931344|Modesto
-6|95926|37066200|Chico
-7|96001|34265364|Redding
-8|95823|34035590|Sacramento
-9|93534|32954470|Lancaster
+Zip Code|City|Pills
+---|---|---
+94550|LIVERMORE|368045810
+90242|DOWNEY|187157905
+92010|CARLSBAD|74056390
+95350|MODESTO|42161712
+95825|SACRAMENTO|41336891
+95355|MODESTO|39931344
+95926|CHICO|37066200
+96001|REDDING|34265364
+95823|SACRAMENTO|34035590
+93534|LANCASTER|32954470
+
