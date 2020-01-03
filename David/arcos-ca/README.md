@@ -123,9 +123,9 @@ merge = merge.rename(columns={'Zip Code': 'BUYER_ZIP'})
 files = sorted(gl.glob('arcos-ca/data/*.csv'))
 for i, f in enumerate(files):
     df = pd.read_csv(f)
-    # Uncomment next two lines for specific year.
-    # df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
-    # df = df[df['TRANSACTION_DATE'].dt.year == 2010]
+    # Comment next two lines for all years from 2006 to 2012.
+    df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
+    df = df[df['TRANSACTION_DATE'].dt.year == 2010]
     del df['TRANSACTION_DATE']
     grp = df.groupby('BUYER_ZIP')
     merge = pd.merge(merge, grp.sum(), how='left', on='BUYER_ZIP')
