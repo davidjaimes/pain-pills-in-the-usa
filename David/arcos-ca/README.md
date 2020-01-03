@@ -96,18 +96,18 @@ zipcode.to_csv('arcos-ca/transactions.csv', index=False)
 
 ## Top Ten
 
-Index|Zip Code|Transactions|City
----|---|---|---
-0|95350|67935|Modesto
-1|90242|61370|Downey
-2|95355|54514|Modesto
-3|93003|51060|Ventura
-4|95630|50943|Folsom
-5|92021|49944|El Cajon
-6|92307|47821|Apple Valley
-7|93065|46860|Simi Valley
-8|95370|45992|Sonora
-9|93720|45902|Fresno
+Zip Code|City|Transactions
+---|---|---
+95350|MODESTO|67935
+90242|DOWNEY|61370
+95355|MODESTO|54514
+93003|VENTURA|51060
+95630|FOLSOM|50943
+92021|EL CAJON|49944
+92307|APPLE VALLEY|47821
+93065|SIMI VALLEY|46860
+95370|SONORA|45992
+93720|FRESNO|45902
 
 # Pills Per Zip code
 
