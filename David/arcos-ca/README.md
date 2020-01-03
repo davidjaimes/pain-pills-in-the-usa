@@ -64,7 +64,7 @@ for f in files[1:]:
     cities = cities[indices]
 df = pd.DataFrame({'Zip Code': unique, 'City': cities})
 df = df.sort_values(by=['Zip Code'])
-df.to_csv('arcos-ca/zip_code.csv')
+df.to_csv('arcos-ca/zip_code.csv', index=False)
 ```
 
 # Transactions Per Zip Code
