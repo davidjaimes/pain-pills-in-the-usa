@@ -5,3 +5,7 @@
 ## Demographic Reports for Census 2010
 
 ![](images/zcta-ca.png)
+
+## Table 1
+
+![](images/table1-zcta.png)
