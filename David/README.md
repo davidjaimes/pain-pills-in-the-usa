@@ -6,6 +6,7 @@
 # census
 
 * Data Source: [California Department of Finance](http://www.dof.ca.gov/Reports/Demographic_Reports/Census_2010/)
+* Generated: August 25, 2011
 
 # income
 
