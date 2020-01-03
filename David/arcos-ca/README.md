@@ -79,9 +79,9 @@ zipcode['Counts'] = 0
 files = sorted(gl.glob('arcos-ca/data/*.csv'))
 for i, f in enumerate(files):
     df = pd.read_csv(f)
-    # Uncomment next two lines for specific year.
-    # df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
-    # df = df[df['TRANSACTION_DATE'].dt.year == 2010]
+    # Comment next two lines for all years from 2006 to 2012.
+    df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
+    df = df[df['TRANSACTION_DATE'].dt.year == 2010]
     valcnt = pd.DataFrame(df['BUYER_ZIP'].value_counts()).reset_index()
     valcnt = valcnt.rename(columns={'index': 'Zip Code', 'BUYER_ZIP': 'Counts'})
     zipcode = pd.merge(zipcode, valcnt, how='left', on='Zip Code')
