@@ -28,7 +28,7 @@ Index(['REPORTER_DEA_NO', 'REPORTER_BUS_ACT', 'REPORTER_NAME',
 We did not need all 42 columns and only chose to work with these 4 column names:
 
 ```
-Index(['BUYER_ZIP', TRANSACTION_DATE', 'DOSAGE_UNIT', Ingredient_Name'],
+Index(['BUYER_CITY', 'BUYER_ZIP', TRANSACTION_DATE', 'DOSAGE_UNIT', Ingredient_Name'],
       dtype='object')
 ```
 
@@ -39,7 +39,7 @@ import pandas as pd
 path = 'arcos-ca-statewide-itemized.tsv'
 chunck = pd.read_csv(path, delimiter='\t', chunksize=200000, low_memory=False)
 for i, c in enumerate(chunck):
-    c = c[['BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT', 'Ingredient_Name']]
+    c = c[['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT', 'Ingredient_Name']]
     c.to_csv(f'arcos-ca/data/statewide-{i+1:02d}.csv', index=False)
 ```
 
@@ -53,12 +53,18 @@ import pandas as pd
 import numpy as np
 files = sorted(gl.glob('arcos-ca/data/*.csv'))
 df = pd.read_csv(files[0])
-unique = df['BUYER_ZIP'].unique()
+unique, indices = np.unique(df['BUYER_ZIP'], return_index=True)
+cities = df['BUYER_CITY'][indices]
 for f in files[1:]:
     df = pd.read_csv(f)
-    concat = np.concatenate((unique, df['BUYER_ZIP'].unique()), axis=None)
-    unique = np.unique(concat)
-np.savetxt('arcos-ca/zip_codes.txt', sorted(unique), fmt='%9d')
+    unq, inx = np.unique(df['BUYER_ZIP'], return_index=True)
+    concat = np.concatenate((unique, unq), axis=None)
+    cities = np.concatenate((cities, df['BUYER_CITY'][inx]), axis=None)
+    unique, indices = np.unique(concat, return_index=True)
+    cities = cities[indices]
+df = pd.DataFrame({'Zip Code': unique, 'City': cities})
+df = df.sort_values(by=['Zip Code'])
+df.to_csv('arcos-ca/zip_code.csv')
 ```
 
 # Transactions Per Zip Code
