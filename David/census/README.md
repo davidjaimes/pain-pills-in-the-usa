@@ -9,3 +9,9 @@
 ## Table 1
 
 ![](images/table1-zcta.png)
+
+# Final Analysis
+
+![](images/pharmacies-california.png)
+
+![](images/top10-pills-per-person.png)
