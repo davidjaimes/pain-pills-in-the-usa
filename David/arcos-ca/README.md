@@ -39,8 +39,8 @@ import pandas as pd
 path = 'arcos-ca-statewide-itemized.tsv'
 chunck = pd.read_csv(path, delimiter='\t', chunksize=200000, low_memory=False)
 for i, c in enumerate(chunck):
-    c = c[['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT', 'Ingredient_Name']]
-    c.to_csv(f'arcos-ca/data/statewide-{i+1:02d}.csv', index=False)
+    c = c[['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT']]
+    c.to_csv(f'data/statewide-{i+1:02d}.csv', index=False)
 ```
 
 # Zip Codes
@@ -51,7 +51,7 @@ We found a total of 1,288 zip codes with the following code:
 import glob as gl
 import pandas as pd
 import numpy as np
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
+files = sorted(gl.glob('data/*.csv'))
 df = pd.read_csv(files[0])
 unique, indices = np.unique(df['BUYER_ZIP'], return_index=True)
 cities = df['BUYER_CITY'][indices]
@@ -64,7 +64,7 @@ for f in files[1:]:
     cities = cities[indices]
 df = pd.DataFrame({'Zip Code': unique, 'City': cities})
 df = df.sort_values(by=['Zip Code'])
-df.to_csv('arcos-ca/zip_codes.csv', index=False)
+df.to_csv('zip_codes.csv', index=False)
 ```
 
 # Pills Per Zip code
