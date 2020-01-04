@@ -45,7 +45,7 @@ for i, c in enumerate(chunck):
 
 # Zip Codes
 
-We found a total of 1,288 zip codes with the following code:
+We found a total of 1,288 unique zip codes from all 70 CSV files with the following code:
 
 ```Python
 import glob as gl
@@ -69,15 +69,15 @@ df.to_csv('zip_codes.csv', index=False)
 
 # Pills Per Zip code
 
-The code to find the total number of pills per zip code:
+The code to find the total number of pills per zip code for 2010:
 
 ```Python
 import pandas as pd
 import glob as gl
-merge = pd.read_csv('arcos-ca/zip_codes.csv')
+merge = pd.read_csv('zip_codes.csv')
 merge['DOSAGE_UNIT'] = 0
 merge = merge.rename(columns={'Zip Code': 'BUYER_ZIP'})
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
+files = sorted(gl.glob('data/*.csv'))
 for i, f in enumerate(files):
     df = pd.read_csv(f)
     # Comment next two lines for all years from 2006 to 2012.
@@ -93,7 +93,7 @@ for i, f in enumerate(files):
 merge = merge.rename(columns={'BUYER_ZIP': 'Zip Code', 'DOSAGE_UNIT': 'Pills'})
 merge = merge.sort_values(by=['Pills'], ascending=False)
 merge['Pills'] = merge['Pills'].astype('int32')
-merge.to_csv('arcos-ca/pills.csv', index=False)
+merge.to_csv('pills-per-zipcode.csv', index=False)
 ```
 
 ## Top Ten
