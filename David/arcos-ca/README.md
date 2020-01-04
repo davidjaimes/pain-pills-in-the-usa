@@ -67,49 +67,6 @@ df = df.sort_values(by=['Zip Code'])
 df.to_csv('arcos-ca/zip_codes.csv', index=False)
 ```
 
-# Transactions Per Zip Code
-
-The code to find the total number of transactions per zip code:
-
-```Python
-import glob as gl
-import pandas as pd
-zipcode = pd.read_csv('arcos-ca/zip_codes.csv')
-zipcode['Counts'] = 0
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
-for i, f in enumerate(files):
-    df = pd.read_csv(f)
-    # Comment next two lines for all years from 2006 to 2012.
-    df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
-    df = df[df['TRANSACTION_DATE'].dt.year == 2010]
-    valcnt = pd.DataFrame(df['BUYER_ZIP'].value_counts()).reset_index()
-    valcnt = valcnt.rename(columns={'index': 'Zip Code', 'BUYER_ZIP': 'Counts'})
-    zipcode = pd.merge(zipcode, valcnt, how='left', on='Zip Code')
-    zipcode = zipcode.fillna(0)
-    zipcode['Counts_x'] = zipcode['Counts_x'] + zipcode['Counts_y']
-    zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
-    del zipcode['Counts_y']
-zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
-zipcode = zipcode.rename(columns={'Counts': 'Transactions'})
-zipcode['Transactions'] = zipcode['Transactions'].astype('int32')
-zipcode.to_csv('arcos-ca/transactions.csv', index=False)
-````
-
-## Top Ten
-
-Zip Code|City|Transactions
----|---|---
-95350|MODESTO|10445
-95355|MODESTO|8315
-92021|EL CAJON|7957
-92307|APPLE VALLEY|7903
-95630|FOLSOM|7697
-90242|DOWNEY|7464
-93003|VENTURA|7408
-95926|CHICO|7077
-95823|SACRAMENTO|7043
-95991|YUBA CITY|6906
-
 # Pills Per Zip code
 
 The code to find the total number of pills per zip code:
