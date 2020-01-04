@@ -28,11 +28,11 @@ Index(['REPORTER_DEA_NO', 'REPORTER_BUS_ACT', 'REPORTER_NAME',
 We did not need all 42 columns and only chose to work with these 4 column names:
 
 ```
-Index(['BUYER_CITY', 'BUYER_ZIP', TRANSACTION_DATE', 'DOSAGE_UNIT', Ingredient_Name'],
+Index(['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT'],
       dtype='object')
 ```
 
-We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **943 MB** with the following Python code:
+We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **437 MB** with the following Python code:
 
 ```Python
 import pandas as pd
