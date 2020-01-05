@@ -9,6 +9,7 @@ Collection of total number of pills per zip code.
 
 * Data Source: [California Department of Finance](http://www.dof.ca.gov/Reports/Demographic_Reports/Census_2010/)
 * Generated: August 25, 2011
+![](census/images/top10-pills-per-person.png)
 
 # income
 
