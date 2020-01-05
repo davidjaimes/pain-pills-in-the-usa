@@ -14,3 +14,7 @@ Collection of total number of pills per zip code.
 # income
 
 * Data Source: [Internal Revenue Service](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-zip-code-data-soi)
+
+# analysis
+
+![](analysis/scatter-log-scale.png)
