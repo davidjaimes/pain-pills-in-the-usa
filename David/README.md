@@ -17,4 +17,5 @@ Collection of total number of pills per zip code.
 
 # analysis
 
+If income and pill saturation are related, then concentrations greater than 0.2 pills per person per day and incomes greater than $100,000 will yield higher death rates.
 ![](analysis/scatter-log-scale.png)
