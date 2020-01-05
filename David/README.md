@@ -19,5 +19,5 @@ Collection of total number of pills per zip code.
 
 If income and pill saturation are related, then concentrations greater than 0.2 pills per person per day and incomes greater than $40,000 will yield higher death rates.
 * Population Mean = 0.2 pills per person per day.
-* $40,000 is 22% 2019 tax bracket for unmarried individuals.
+* $40,000 is the 22%, 2019 tax bracket for unmarried individuals.
 ![](analysis/scatter-log-scale.png)
