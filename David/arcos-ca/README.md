@@ -28,30 +28,30 @@ Index(['REPORTER_DEA_NO', 'REPORTER_BUS_ACT', 'REPORTER_NAME',
 We did not need all 42 columns and only chose to work with these 4 column names:
 
 ```
-Index(['BUYER_CITY', 'BUYER_ZIP', TRANSACTION_DATE', 'DOSAGE_UNIT', Ingredient_Name'],
+Index(['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT'],
       dtype='object')
 ```
 
-We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **943 MB** with the following Python code:
+We took advantage of the Pandas `chuncksize` parameter to parse through the 6.4 GB file and save it as multiple files, each with 200,000 rows. We turned the **6.4 GB** file and reduced it down to **437 MB** with the following Python code:
 
 ```Python
 import pandas as pd
 path = 'arcos-ca-statewide-itemized.tsv'
 chunck = pd.read_csv(path, delimiter='\t', chunksize=200000, low_memory=False)
 for i, c in enumerate(chunck):
-    c = c[['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT', 'Ingredient_Name']]
-    c.to_csv(f'arcos-ca/data/statewide-{i+1:02d}.csv', index=False)
+    c = c[['BUYER_CITY', 'BUYER_ZIP', 'TRANSACTION_DATE', 'DOSAGE_UNIT']]
+    c.to_csv(f'data/statewide-{i+1:02d}.csv', index=False)
 ```
 
 # Zip Codes
 
-We found a total of 1,288 zip codes with the following code:
+We found a total of 1,288 unique zip codes from all 70 CSV files with the following code:
 
 ```Python
 import glob as gl
 import pandas as pd
 import numpy as np
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
+files = sorted(gl.glob('data/*.csv'))
 df = pd.read_csv(files[0])
 unique, indices = np.unique(df['BUYER_ZIP'], return_index=True)
 cities = df['BUYER_CITY'][indices]
@@ -64,63 +64,20 @@ for f in files[1:]:
     cities = cities[indices]
 df = pd.DataFrame({'Zip Code': unique, 'City': cities})
 df = df.sort_values(by=['Zip Code'])
-df.to_csv('arcos-ca/zip_codes.csv', index=False)
+df.to_csv('zip_codes.csv', index=False)
 ```
-
-# Transactions Per Zip Code
-
-The code to find the total number of transactions per zip code:
-
-```Python
-import glob as gl
-import pandas as pd
-zipcode = pd.read_csv('arcos-ca/zip_codes.csv')
-zipcode['Counts'] = 0
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
-for i, f in enumerate(files):
-    df = pd.read_csv(f)
-    # Comment next two lines for all years from 2006 to 2012.
-    df['TRANSACTION_DATE'] = pd.to_datetime(df['TRANSACTION_DATE'], format='%m%d%Y')
-    df = df[df['TRANSACTION_DATE'].dt.year == 2010]
-    valcnt = pd.DataFrame(df['BUYER_ZIP'].value_counts()).reset_index()
-    valcnt = valcnt.rename(columns={'index': 'Zip Code', 'BUYER_ZIP': 'Counts'})
-    zipcode = pd.merge(zipcode, valcnt, how='left', on='Zip Code')
-    zipcode = zipcode.fillna(0)
-    zipcode['Counts_x'] = zipcode['Counts_x'] + zipcode['Counts_y']
-    zipcode = zipcode.rename(columns={'Counts_x': 'Counts'})
-    del zipcode['Counts_y']
-zipcode = zipcode.sort_values(by=['Counts'], ascending=False)
-zipcode = zipcode.rename(columns={'Counts': 'Transactions'})
-zipcode['Transactions'] = zipcode['Transactions'].astype('int32')
-zipcode.to_csv('arcos-ca/transactions.csv', index=False)
-````
-
-## Top Ten
-
-Zip Code|City|Transactions
----|---|---
-95350|MODESTO|10445
-95355|MODESTO|8315
-92021|EL CAJON|7957
-92307|APPLE VALLEY|7903
-95630|FOLSOM|7697
-90242|DOWNEY|7464
-93003|VENTURA|7408
-95926|CHICO|7077
-95823|SACRAMENTO|7043
-95991|YUBA CITY|6906
 
 # Pills Per Zip code
 
-The code to find the total number of pills per zip code:
+The code to find the total number of pills per zip code for 2010:
 
 ```Python
 import pandas as pd
 import glob as gl
-merge = pd.read_csv('arcos-ca/zip_codes.csv')
+merge = pd.read_csv('zip_codes.csv')
 merge['DOSAGE_UNIT'] = 0
 merge = merge.rename(columns={'Zip Code': 'BUYER_ZIP'})
-files = sorted(gl.glob('arcos-ca/data/*.csv'))
+files = sorted(gl.glob('data/*.csv'))
 for i, f in enumerate(files):
     df = pd.read_csv(f)
     # Comment next two lines for all years from 2006 to 2012.
@@ -136,7 +93,7 @@ for i, f in enumerate(files):
 merge = merge.rename(columns={'BUYER_ZIP': 'Zip Code', 'DOSAGE_UNIT': 'Pills'})
 merge = merge.sort_values(by=['Pills'], ascending=False)
 merge['Pills'] = merge['Pills'].astype('int32')
-merge.to_csv('arcos-ca/pills.csv', index=False)
+merge.to_csv('pills-per-zipcode.csv', index=False)
 ```
 
 ## Top Ten
