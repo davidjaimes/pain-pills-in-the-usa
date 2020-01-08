@@ -1,0 +1,63 @@
+County,Rates,95% LCL,95% UCL,Counts
+Alameda,1.56,1,2.33,23
+Alpine,0,0,306.9,0
+Amador,10.46,3.68,26.1,4
+Butte,5.02,2.58,8.92,11
+Calaveras,6.49,1.77,18.6,3
+California,4.87,4.65,5.1,1783
+Colusa,4.73,1.29,25.2,1
+Contra Costa,5.76,4.39,7.44,59
+Del Norte,7.02,1.91,24.45,2
+El Dorado,10.05,6.06,15.78,18
+Fresno,6.6,5.04,8.49,60
+Glenn,0,0,13.17,0
+Humboldt,19.6,12.83,28.69,26
+Imperial,4.17,1.71,8.57,7
+Inyo,5.46,1.49,29.08,1
+Kern,7.33,5.6,9.44,60
+Kings,5.26,2.43,10.23,8
+Lake,20.19,11.21,34.12,13
+Lassen,17.04,6.45,36.92,6
+Los Angeles,2.4,2.1,2.72,233
+Madera,4.04,1.53,8.77,6
+Marin,9.66,6.21,14.36,24
+Mariposa,5.43,1.48,28.93,1
+Mendocino,8,3.92,15.92,7
+Merced,3.99,1.99,7.28,10
+Modoc,20.94,5.7,72.92,2
+Mono,0,0,26.61,0
+Monterey,5.17,3.33,7.79,21
+Napa,2.98,1.29,7.25,4
+Nevada,6.11,2.73,12.9,6
+Orange,8.32,7.31,9.42,246
+Placer,2.37,1.22,4.51,8
+Plumas,14.7,4,42.15,3
+Riverside,5.26,4.34,6.33,111
+Sacramento,6.74,5.45,8.25,94
+San Benito,1.84,0.5,9.82,1
+San Bernardino,2.64,1.99,3.45,53
+San Diego,8,7.03,9.09,242
+San Francisco,1.9,1.09,3.1,15
+San Joaquin,9.38,7.22,11.99,63
+San Luis Obispo,4.88,2.64,8.31,13
+San Mateo,2.42,1.49,3.79,17
+Santa Barbara,2.64,1.51,4.58,11
+Santa Clara,2.36,1.7,3.19,41
+Santa Cruz,8.97,5.73,13.41,23
+Shasta,15.23,10.06,22.14,27
+Sierra,0,0,111.11,0
+Siskiyou,11.17,4.46,25.38,5
+Solano,3.67,2.09,6.01,15
+Sonoma,11.2,8.42,14.63,53
+Stanislaus,7.07,4.98,9.77,36
+Sutter,6.39,2.86,13.49,6
+Tehama,4.79,1.81,13.32,3
+Trinity,7.32,2,39.01,1
+Tulare,2.1,0.96,3.97,9
+Tuolumne,10.65,4.04,23.09,6
+Unknown,NaN,0,NaN,0
+Ventura,7.31,5.58,9.43,59
+Yolo,3.04,1.36,6.42,6
+Yuba,0,0,5.14,0
+Source: CDPH Vital Statistics Multiple Cause of Death and California Comprehensive Death Files,,,,
+Prepared by: California Department of Public Health - Safe and Active Communities Branch.,,,,
